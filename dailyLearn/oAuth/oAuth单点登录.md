@@ -21,14 +21,23 @@
 
 2. oAuth 3种角色  
 Resource Owner, Resource Server, Clien Application, Authorization server  
-![oAuth2](./img/oAuth2.png)
 
 3. oAuth授权码模式详解
-简单来说，就是两次认证，第一次认证拿code(令牌)，第二次拿token。  
-比如: 访问会给你发一个钥匙即code,需要拿这个code去看和门是否匹配(token)
+简单来说，就是两次认证，第一次认证拿code，第二次拿token。  
+比如: 访问会给你发一个钥匙即code,需要拿这个code去看和门是否匹配(token)。
+![Authorization_code](./img/Authorization_Code.png)
 
-## Theory
+## Code & Results
 
-## Results
+![Login](./img/Login.jpg)
+![Authorization](./img/Authorization.jpg)
+![Access_code](./img/Access_code.jpg)
+![Access_token](./img/Access_token.jpg)
 
 ## Discussion
+
+### 跨域
+
+1. 浏览器的同源策略
+2. 跨域问题
+3. 解决跨域问题
