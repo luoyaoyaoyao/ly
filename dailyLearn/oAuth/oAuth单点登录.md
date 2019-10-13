@@ -6,7 +6,7 @@
 
 1. Spring Boot Security包含了oAuth的实现
 
-2. oAuth是开放的网络授权标准协议，目前版本是2.0,oAuth2可以通过别的应用程序授权登录，从而实现single-sign-on单点登录。
+2. oAuth是开放的网络授权标准协议，目前版本是2.0,oAuth2可以通过别的应用程序授权登录，从而实现single-sign-on单点登录。  
 ![oAuth](./img/oAuth.png)
 3. oAuth的登陆方式，本博客主要实现授权码模式：  
 
