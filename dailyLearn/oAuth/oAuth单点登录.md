@@ -29,21 +29,21 @@ Resource Owner, Resource Server, Clien Application, Authorization server
 
 ## Code & Results
 
-step1: 当用户点击login,会跳转到自定义的后台登陆接口(Spring Serurity自动生成)  
+**Step1**: 当用户点击login,会跳转到自定义的后台登陆接口(Spring Serurity自动生成)  
 Request URL: http://localhost:8080/login/github?auth_url=http://localhost:3000/  
 服务器http响应码：302，表示会重定向到oAuth的授权界面
 ![Login](./img/Login.jpg)  
 
-step2: 授权，返回code
+**Step2**: 授权，返回code
 Request URL: https://github.com/login/oauth/authorize?client_id=f896f4e4633dcd44e100&redirect_uri=http://localhost:8080/login/github?auth_url%3Dhttp://localhost:3000/&response_type=code&state=IQED5P
 服务器http响应码：302，表示会重定向到resource server
 ![Authorization](./img/Authorization.jpg)
 
-step3：获取code
+**Step3**：获取code
 Request URL: http://localhost:8080/login/github?auth_url=http://localhost:3000/&code=3bc620a19f0f0029282c&state=IQED5P  
 ![Access_code](./img/Access_code.jpg)
 
-step4: 后台直接发出请求拿到token
+**Step4**: 后台直接发出请求拿到token
 ![Access_token](./img/Access_token.jpg)
 
 ![token](./img/token.jpg)
