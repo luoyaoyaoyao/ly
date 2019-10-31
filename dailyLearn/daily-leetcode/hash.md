@@ -43,3 +43,5 @@ class Solution {
     }
 }
 ```
+
+3. [Single Number](https://leetcode.com/problems/single-number/)
