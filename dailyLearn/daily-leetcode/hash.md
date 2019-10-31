@@ -32,5 +32,14 @@ public class TwoSum {
 }
 ```
 
-2. [1207. Unique Number of Occurrences](https://leetcode.com/problems/unique-number-of-occurrences/)
+2. [Unique Number of Occurrences](https://leetcode.com/problems/unique-number-of-occurrences/)
 
+```java
+class Solution {
+    public boolean uniqueOccurrences(int[] arr) {
+        Map<Integer, Integer> hashMap = new HashMap<>();
+        Arrays.stream(arr).forEach(x -> hashMap.put(x,hashMap.getOrDefault(x, 0) + 1));
+        return new HashSet(hashMap.values()).size() == hashMap.size();
+    }
+}
+```
