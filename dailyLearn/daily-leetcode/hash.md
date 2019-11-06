@@ -46,15 +46,28 @@ class Solution {
 
 3. [Single Number](https://leetcode.com/problems/single-number/)
 
+Solution 1:
+
 ```java
 public int singleNumber(int[] nums) {
         HashMap<Integer, Integer> hashMap = new HashMap<>();
-        for (int num: nums) {
-            hashMap.put(num, hashMap.getOrDefault(num,0)+1);
-        }
+        Arrays.stream.forEach(x -> hashMap.put(num, hashMap.getOrDefault(x, 0) + 1));
         for (int key: hashMap.keySet()) {
             if (hashMap.get(key)==1) return key;
         }
         return 0;
     }
 ```
+
+Solution 2:
+
+```java
+public int singleNumber(int[] nums) {
+        for (int i = 0; i < nums.length-1; i++){
+             nums[i+1] ^= nums[i];
+        }
+        return nums[nums.length-1];
+    }
+```
+
+//还需要搞清楚keySet和stream处理
