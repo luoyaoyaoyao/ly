@@ -52,8 +52,10 @@ Solution 1:
 public int singleNumber(int[] nums) {
         HashMap<Integer, Integer> hashMap = new HashMap<>();
         Arrays.stream.forEach(x -> hashMap.put(num, hashMap.getOrDefault(x, 0) + 1));
-        for (int key: hashMap.keySet()) {
-            if (hashMap.get(key)==1) return key;
+        for (Map.Entry<Integer, Integer> entry: hashMap.entrySet()){
+            if (entry.getValue() == 1){
+                return entry.getKey();
+            }
         }
         return 0;
     }
@@ -70,4 +72,3 @@ public int singleNumber(int[] nums) {
     }
 ```
 
-//还需要搞清楚keySet和stream处理

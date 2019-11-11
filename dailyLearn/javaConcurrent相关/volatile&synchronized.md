@@ -25,6 +25,7 @@ public class VolatileDemo {
     public static class ThreadTwo implements Runnable {
         @Override
         public void run() {
+            Thread.sleep(100);
             j = i;
         }
     }
