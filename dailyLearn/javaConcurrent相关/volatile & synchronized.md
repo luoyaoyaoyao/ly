@@ -9,8 +9,6 @@ Java种使用的并发机制依赖于jvm的实现和cpu指令。
 
 * 数据可见性
 
-在不使用volatile
-
 ```java
 package com.ly.concurrency.demo;
 
@@ -53,3 +51,5 @@ public class VolatileTest {
 }
 
 ```
+
+* 避免重排序 -> 双重检索

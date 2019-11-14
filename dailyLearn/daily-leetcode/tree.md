@@ -5,18 +5,40 @@
 
 Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
 
-Example1: 
+Example1:
 
 ```java
 Input: [1,3,5,6], 5
 Output: 2
 ```
 
-Example1: 
+Example1:
 
 ```java
 Input: [1,3,5,6], 2
 Output: 1
+```
+
+Solution:
+
+```java
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+       int left = 0;
+        int right = nums.length;
+        while (left < right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] == target) {
+                right = mid;
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else if (nums[mid] > target) {
+                right = mid;
+            }
+        }
+        return left;
+}
+}
 ```
 
 2. [Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
