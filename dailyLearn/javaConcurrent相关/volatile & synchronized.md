@@ -53,3 +53,22 @@ public class VolatileTest {
 ```
 
 * 避免重排序 -> 双重检索
+
+```java
+public class SingleTon {
+    public volatile Singleton singleton;
+    private SingleTon () {
+    }
+    public static ProcessEngine getProcessEngine() {
+        if (singleton == null) {
+            synchronized (Configuration.class) {
+                if (singleton == null) {
+                    singleton = new Configuration().setResource("jbpm.cfg.xml").buildProcessEngine();
+                }
+            }
+        }
+        return Configuration.singleton;
+    }
+}
+
+```
