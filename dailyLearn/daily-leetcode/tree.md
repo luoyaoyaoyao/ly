@@ -76,3 +76,27 @@ class Solution {
     }
 }
 ```
+
+3. [Same Tree](https://leetcode.com/problems/same-tree/)
+
+Given two binary trees, write a function to check if they are the same or not.
+
+```java
+Input:     1         1
+          / \       / \
+         2   3     2   3
+
+        [1,2,3],   [1,2,3]
+
+Output: true
+```
+
+Solution:
+
+```java
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) return true;
+        if (p == null || q == null) return false;
+        return p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+```
