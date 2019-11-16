@@ -100,3 +100,17 @@ Solution:
         return p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 ```
+
+4. [Symmetric Tree](https://leetcode.com/problems/symmetric-tree/)
+
+Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+
+```java
+   1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+
+output: true
+```
