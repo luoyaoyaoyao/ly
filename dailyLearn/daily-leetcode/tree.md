@@ -114,3 +114,37 @@ Given a binary tree, check whether it is a mirror of itself (ie, symmetric aroun
 
 output: true
 ```
+
+Solution:
+
+```java
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null || (root.left == null && root.right == null)) {return true;}
+	return checkIfSymmetricTree (root.left, root.right);
+}
+
+public boolean checkIfSymmetricTree(TreeNode p, TreeNode q) {
+    if(p == null && q == null) {return true;}
+    if(p == null || q == null) {return false;}
+    return p.val == q.val && checkIfSymmetricTree(p.left, q.right) && checkIfSymmetricTree(p.right, q.left); 
+}
+}
+```
+
+5. [Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/)
+
+```java
+class Solution {
+public boolean isBalanced(TreeNode root) {
+        if (root == null) return true;
+        if (Math.abs(getMaxDepth(root.left) - getMaxDepth(root.right)) > 1) return false;
+        return isBalanced(root.left) && isBalanced(root.right);
+    }
+
+    public int getMaxDepth(TreeNode root) {
+        if (root == null) return 0;
+        return Math.max(getMaxDepth(root.left), getMaxDepth(root.right)) + 1;
+    }
+}
+```
