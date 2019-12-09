@@ -52,3 +52,41 @@ public class MaxHeap {
 
 ```
 
+[215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
+
+```java
+class Solution {
+    public void sortHeap(int[] nums, int k) {
+        for (int i = nums.length / 2 - 1; i >= 0; i--) {
+            adjustHeap(nums, i, nums.length);
+        }
+
+        for (int i = nums.length - 1; i > nums.length - k - 1; i--) {
+            int temp = nums[0];
+            nums[0] = nums[i];
+            nums[i] = temp;
+            adjustHeap(nums, 0, i);
+        }
+    }
+
+    public void adjustHeap(int[] nums, int pos, int templength) {
+        while (2 * pos + 1 < templength) {
+            int max = 2 * pos + 1;
+            if (2 * pos + 2 < templength) {
+                max = nums[2 * pos + 1] > nums[2 * pos + 2] ? 2 * pos + 1 : 2 * pos + 2;
+            }
+            if (nums[pos] > nums[max]) return;
+            int temp = nums[pos];
+            nums[pos] = nums[max];
+            nums[max] = temp;
+            pos = max;
+        }
+    }
+    
+    public int findKthLargest(int[] nums, int k) {
+        sortHeap(nums, k);
+        System.out.println(Arrays.toString(nums));
+        return nums[nums.length - k];
+    }
+}
+```
