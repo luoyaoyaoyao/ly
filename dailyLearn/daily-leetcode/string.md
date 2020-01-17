@@ -53,3 +53,34 @@ class Solution {
     }
 }
 ```
+
+2. [1143. Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/)
+
+```java
+A subsequence of a string is a new string generated from the original string with some characters(can be none) deleted without changing the relative order of the remaining characters. (eg, "ace" is a subsequence of "abcde" while "aec" is not). A common subsequence of two strings is a subsequence that is common to both strings.
+
+Input: text1 = "abcde", text2 = "ace" 
+Output: 3  
+Explanation: The longest common subsequence is "ace" and its length is 3.
+```
+
+```java
+
+```
+
+3. [718. Maximum Length of Repeated Subarray](https://leetcode.com/problems/maximum-length-of-repeated-subarray/)
+
+```java
+Given two integer arrays A and B, return the maximum length of an subarray that appears in both arrays.
+
+Input:
+A: [1,2,3,2,1]
+B: [3,2,1,4,7]
+Output: 3
+Explanation: 
+The repeated subarray with maximum length is [3, 2, 1].
+```
+
+```java
+
+```
