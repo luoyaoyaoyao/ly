@@ -60,19 +60,58 @@ Output: [1,3,2]
 
 ```java
 class Solution {
-    List<Integer> list = new ArrayList<>();
+    List<Integer> result = new ArrayList<>();
     public List<Integer> inorderTraversal(TreeNode root) {
-        if (root == null) {
-            return list;
+        if (root == null) return new ArrayList<>();;
+        inorderTraversal(root.left);
+        result.add(root.val);
+        inorderTraversal(root.right);
+        return result;
+    }
+}
+```
+
+```java
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> result = new ArrayList<>();
+        stack.push(root);
+        TreeNode curr = root;
+        while (curr != null && !stack.isEmpty()) {
+            while (curr.left != null) {
+                curr = curr.left;
+                stack.push(curr);
+            }
+            TreeNode node = stack.pop();
+            result.add(node.val);
+            
+            if (node.right != null) {
+                curr = node.right;
+                stack.push(curr);
+            }
         }
-        if (root.left != null) {
-            inorderTraversal(root.left);
+        return result;
         }
-        list.add(root.val);
-        if (root.right != null) {
-            inorderTraversal(root.right);
+}
+```
+
+```java
+public class Solution {
+    public List < Integer > inorderTraversal(TreeNode root) {
+        List < Integer > res = new ArrayList < > ();
+        Stack < TreeNode > stack = new Stack < > ();
+        TreeNode curr = root;
+        while (curr != null || !stack.isEmpty()) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            res.add(curr.val);
+            curr = curr.right;
         }
-        return list;
+        return res;
     }
 }
 ```
@@ -149,7 +188,7 @@ public boolean isBalanced(TreeNode root) {
 }
 ```
 
-[104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+6. [104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
 
 ```java
 class Solution {
@@ -159,3 +198,4 @@ class Solution {
     }
 }
 ```
+
