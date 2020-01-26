@@ -90,3 +90,47 @@ class Solution {
     }
 }
 ```
+
+QuickSort  
+3. [75. Sort Colors](https://leetcode.com/problems/sort-colors/)
+
+Example:
+
+```java
+Input: [2,0,2,1,1,0]
+Output: [0,0,1,1,2,2]
+```
+
+Solution:
+
+```java
+class Solution {
+    public void sortColors(int[] nums) {
+        quickSort(nums, 0, nums.length - 1);
+    }
+    public void quickSort (int[] nums, int p, int r) {
+        if (p < r) {
+            int q = partition (nums, p, r);
+            quickSort (nums, p, q - 1);
+            quickSort (nums, q + 1, r);
+        }
+    }
+    
+    public int partition (int[] nums, int p, int r) {
+        int temp = nums[r];
+        int i = p - 1;
+        for (int j = p; j < r; j++) {
+            if (nums[j] <= temp) {
+                i = i + 1;
+                int tmp1 = nums[i];
+                nums[i] = nums[j];
+                nums[j] = tmp1;
+            }
+        }
+        int tmp2 = nums[i + 1];
+        nums[i + 1] = nums[r];
+        nums[r] = tmp2;
+        return i + 1;
+    }
+}
+```
