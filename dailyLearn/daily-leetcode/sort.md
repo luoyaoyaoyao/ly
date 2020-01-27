@@ -134,3 +134,71 @@ class Solution {
     }
 }
 ```
+
+MergeSort
+4. [148. Sort List](https://leetcode.com/problems/sort-list/)
+
+Example1:
+
+```java
+Input: 4->2->1->3
+Output: 1->2->3->4kjhhyhu
+```
+
+Example2:
+
+```java
+Input: -1->5->3->4->0
+Output: -1->0->3->4->5
+```
+
+Solution:
+
+```java
+class Solution {
+    public ListNode sortList(ListNode head) {
+        return mergeSort(head);
+    }
+
+    public ListNode mergeSort(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode pre = null;
+        while (fast != null && fast.next != null) {
+            pre = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        pre.next = null;
+        ListNode head1 = mergeSort(head);
+        ListNode head2 = mergeSort(slow);
+        return merge(head1, head2);
+    }
+
+    public ListNode merge(ListNode head1, ListNode head2) {
+        ListNode curr1 = head1;
+        ListNode curr2 = head2;
+        ListNode result = new ListNode(0), result1 = result;
+        while (curr1 != null && curr2 != null) {
+            if (curr1.val < curr2.val) {
+                result.next = curr1;
+                curr1 = curr1.next;
+            } else {
+                result.next = curr2;
+                curr2 = curr2.next;
+            }
+            result = result.next;
+        }
+        if (curr1 != null) {
+            result.next = curr1;
+        }
+        if (curr2 != null) {
+            result.next = curr2;
+        }
+        return result1.next;
+    }
+}
+```
