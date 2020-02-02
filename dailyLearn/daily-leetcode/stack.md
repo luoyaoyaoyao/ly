@@ -58,7 +58,6 @@ class Solution {
         int[] ans = new int[T.length];
         for (int i = T.length - 1; i >= 0; i--) {
             while (!stack.isEmpty() && T[i] >= T[stack.peek()]) {
-                System.out.println(stack.peek());
                 stack.pop();
             }
             ans[i] = stack.isEmpty() ? 0 : stack.peek() - i;
@@ -67,4 +66,58 @@ class Solution {
         return ans;
     }
 }
+```
+
+3. [232. Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/)
+
+```java
+MyQueue queue = new MyQueue();
+
+queue.push(1);
+queue.push(2);  
+queue.peek();  // returns 1
+queue.pop();   // returns 1
+queue.empty(); // returns false
+```
+
+```java
+class MyQueue {
+
+    Stack<Integer> s1 = new Stack<>();
+    Stack<Integer> s2 = new Stack<>();
+    int top;
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        
+    }
+    
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        top = s1.isEmpty() ? x : top; //注意只需要s1
+        s1.push(x);
+        
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        if (s2.isEmpty()) {
+            while (!s1.isEmpty()) {
+                s2.push(s1.pop());
+            }
+        }
+        return s2.pop();
+    }
+    
+    /** Get the front element. */
+    public int peek() {
+        if (!s2.isEmpty()) return s2.peek(); //注意只需要s2
+        return top;
+    }
+    
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return s1.isEmpty() && s2.isEmpty();
+    }
+}
+
 ```
