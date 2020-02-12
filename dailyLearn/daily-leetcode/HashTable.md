@@ -1,4 +1,14 @@
-# hash
+# HashTable
+
+Points:  
+
+1. 优点: 在合理假设下，在散列表中查找一个元素的平均时间是O(1).
+
+2. 哈希冲突
+
+3. 散列技术（直接寻址表，散列表，散列函数，etc.）.
+
+Practice:
 
 1. [Two Sum](https://leetcode.com/problems/two-sum/)
 
