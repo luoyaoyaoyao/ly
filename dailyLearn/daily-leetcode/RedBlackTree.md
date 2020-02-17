@@ -89,3 +89,50 @@ T.root.colort = BLACK;
 ## 删除
 
 时间复杂度: O(lgn)
+
+```java
+RB_Transplant(T, u, v)
+if u.p == null
+    T.root = v;
+else if u == u.p.left
+    u.p.left = v;
+else if u == u.p.right
+    u.p.right = v;
+v.p = u.p;
+```
+
+```java
+RB_Delete(T, z)
+z_original_color = z.color;
+//similar with BST_DeleteNode
+//TreeNode x is the replacement of y
+if z_original_color == Black
+    RB_Delete_Fixup(T, x)
+```
+
+
+```java
+RB_Delete_Fixup(T, x)
+while x != T.root && x.color == Black
+    if x == x.p.left
+        w = x.p.right;
+        if w.color == Red
+            w.color = Black
+            x.p.color = Red
+            Left_Rotate(T, x.p)
+            w = x.p.right //case 1
+        if w.left.color == Black && w.right.color == Black
+            w.colort = Red
+            x = x.p //case 2
+        else if w.right.color == Black
+                w.left.color == Black
+                w.color = Red
+                Right_Rotate(T, w)
+                w = x.p.right
+                w.color = x.p.color
+                x.p.color = Black
+                w.right.color = Black
+                Left_Rotate(T, x.p)
+                x = T.root //case 3
+x.color = Black
+```
