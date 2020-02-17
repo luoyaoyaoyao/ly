@@ -1,3 +1,18 @@
+# 排序
+
+## 快速排序 （分治法）
+
+QuickSort(arr, p, r)
+if p < r
+q = partition(arr, p, r)
+QuickSort(arr, p, q)
+QuickSort(arr, q + 1, r)
+
+定义两个指针i, j
+小于等于参考值的都在<=i
+大于参考值的在i -> j
+最后交换数值
+
 [heap sort]
 
 ```java
