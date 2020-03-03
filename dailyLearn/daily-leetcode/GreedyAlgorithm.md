@@ -27,3 +27,8 @@ for (int i = 1; i <= n; i++) {
 }
 return A;
 ```
+
+```java
+Dynamic_Programming(s, f)
+
+```

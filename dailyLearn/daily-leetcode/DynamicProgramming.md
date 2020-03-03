@@ -402,3 +402,91 @@ class Solution {
     }
 }
 ```
+
+### 股票
+
+[309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
+
+```java
+Input: [1,2,3,0,2]
+Output: 3 
+Explanation: transactions = [buy, sell, cooldown, buy, sell]
+```
+
+```java
+class Solution {
+    public int maxProfit(int[] prices) {
+        if (prices.length == 0 || prices == null) return 0;
+        int b1 = -prices[0];
+        int s1 = 0;
+        int s2 = 0;
+        for (int i = 1; i < prices.length; i++) {
+            int b0 = Math.max(s2 - prices[i], b1);
+            int s0 = Math.max(b1 + prices[i], s1);
+            s2 = s1;
+            s1 = s0;
+            b1 = b0;
+        }
+        return s1;
+    }
+}
+```
+
+[714. Best Time to Buy and Sell Stock with Transaction Fee](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)
+
+```java
+Input: prices = [1, 3, 2, 8, 4, 9], fee = 2
+Output: 8
+Explanation: The maximum profit can be achieved by:
+Buying at prices[0] = 1
+Selling at prices[3] = 8
+Buying at prices[4] = 4
+Selling at prices[5] = 9
+The total profit is ((8 - 1) - 2) + ((9 - 4) - 2) = 8.
+```
+
+```java
+class Solution {
+    public int maxProfit(int[] prices, int fee) {
+        if (prices.length == 0 || prices == null) return 0;
+        int n = prices.length;
+        int s0 = 0;
+        int b0 = -prices[0];
+        for (int i = 1; i < n; i++) {
+            b0 = Math.max(s0 - prices[i], b0);  
+            s0 = Math.max(b0 + prices[i] - fee, s0);
+        }
+        return s0;
+    }
+}
+```
+
+### 字符串编辑
+
+```java
+Input: "sea", "eat"
+Output: 2
+Explanation: You need one step to make "sea" to "ea" and another step to make "eat" to "ea".
+```
+
+```java
+class Solution {
+    public int minDistance(String word1, String word2) {
+        int m = word1.length();
+        int n = word2.length();
+        int[][] dp = new int[m + 1][n + 1];
+        int minstep = 0;
+        for (int i = 1; i < m + 1; i++) {
+            int maxval = 0;
+            for (int j = 1; j < n + 1; j++) {
+                if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return m + n - 2 * dp[m][n];
+    }
+}
+```
