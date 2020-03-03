@@ -4,11 +4,11 @@
 
 1. 分治法：分解，求解，合并
 
-2. 动态规划：对每个子问题只求解一次
+2. 动态规划：最优子结构，重复子问题，对每个子问题只求解一次
 
 example：
 
-1. 钢条切割
+### 钢条切割
 
 自顶向下的递归求法：  
 时间复杂度：2^n
@@ -133,7 +133,7 @@ class Solution {
 }
 ```
 
-2. LCS(Longest Common Sequence)
+### LCS(Longest Common Sequence)
 
 Practice:
 
@@ -148,11 +148,9 @@ Explanation: The longest common subsequence is "ace" and its length is 3.
 ```java
 class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
-       int m = text1.length();
+        int m = text1.length();
         int n = text2.length();
         int[][] dp = new int[m + 1][n + 1];
-        for (int i = 0; i < m + 1; i++) {dp[i][0] = 0;}
-        for (int j = 0; j < n + 1; j++) {dp[0][j] = 0;}
         for (int i = 1; i < m + 1; i++) {
             for (int j = 1; j < n + 1; j++) {
                 if (text1.charAt(i - 1) == (text2.charAt(j - 1))) {
@@ -199,3 +197,208 @@ class Solution {
 }
 ```
 
+[646. Maximum Length of Pair Chain](https://leetcode.com/problems/maximum-length-of-pair-chain/)
+
+```java
+Input: [[1,2], [2,3], [3,4]]
+Output: 2
+Explanation: The longest chain is [1,2] -> [3,4]
+```
+
+```java
+class Solution {
+    public int findLongestChain(int[][] pairs) {
+        Arrays.sort(pairs, (a, b) -> a[0] - b[0]);
+        int length  = pairs.length;
+        if (length == 0) return 0;
+        int[] dp = new int[length];
+        int maxans = 0;
+        for (int i = 0; i < length; i++) {
+            int maxval = 0;
+            for (int j = 0; j < i; j++) {
+                if (pairs[j][1] < pairs[i][0]) {
+                    maxval = Math.max(maxval, dp[j]);
+                }
+            }
+            dp[i] = maxval + 1;
+        }
+        return Arrays.stream(dp).max().orElse(0);
+    }
+}
+```
+
+[376. Wiggle Subsequence](https://leetcode.com/problems/wiggle-subsequence/description/)
+
+```java
+Input: [1,17,5,10,13,15,10,5,16,8]
+Output: 7
+Explanation: There are several subsequences that achieve this length. One is [1,17,10,13,10,16,8].
+```
+
+```java
+class Solution {
+    public int wiggleMaxLength(int[] nums) {
+        if (nums.length == 0 || nums == null) return 0;
+        int[] dp = new int[nums.length];
+        int[] s = new int[nums.length];
+        s[0] = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int maxval = 0;
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j] && s[j] <= 0) {
+                    s[i] = maxval > dp[j] + 1 ? s[j] : 1;
+                    maxval = Math.max(maxval, dp[j]);
+                } else if (nums[i] < nums[j] && s[j] >= 0) {
+                    s[i] = maxval > dp[j] + 1 ? s[j] : -1;
+                    maxval = Math.max(maxval, dp[j]);
+                }
+            }
+            dp[i] = maxval + 1;
+        }
+        return Arrays.stream(dp).max().orElse(0);
+    }
+}
+```
+
+O(N)时间复杂度：
+
+```java
+public int wiggleMaxLength(int[] nums) {
+    if (nums == null || nums.length == 0) {
+        return 0;
+    }
+    int up = 1, down = 1;
+    for (int i = 1; i < nums.length; i++) {
+        if (nums[i] > nums[i - 1]) {
+            up = down + 1;
+        } else if (nums[i] < nums[i - 1]) {
+            down = up + 1;
+        }
+    }
+    return Math.max(up, down);
+}
+```
+
+### Matrix
+
+[64. Minimum Path Sum (Medium)](https://leetcode.com/problems/minimum-path-sum/description/)
+
+```java
+Input:
+[
+  [1,3,1],
+  [1,5,1],
+  [4,2,1]
+]
+Output: 7
+Explanation: Because the path 1→3→1→1→1 minimizes the sum.
+```
+
+```java
+class Solution {
+    public int minPathSum(int[][] grid) {
+        if (grid.length == 0 || grid == null) return 0;
+        int m = grid.length;
+        int n = grid[0].length;
+        int[][] dp = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 && j != 0) {grid[i][j] += grid[i][j - 1];}
+                if (i != 0 && j == 0) {grid[i][j] += grid[i - 1][j];}
+                if (i != 0 && j != 0) {dp[i][j] = Math.min(dp[i - 1][j] + grid[i][j], dp[i][j - 1] + grid[i][j]);}
+            }
+        }
+        return dp[m - 1][n - 1];
+    }
+}
+```
+
+[62. Unique Paths](https://leetcode.com/problems/unique-paths/)
+
+```java
+Input: m = 3, n = 2
+Output: 3
+Explanation:
+From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+1. Right -> Right -> Down
+2. Right -> Down -> Right
+3. Down -> Right -> Right
+```
+
+```java
+class Solution {
+    public int uniquePaths(int m, int n) {
+        if (m == 0 || n == 0) return 0;
+        int[][] dp = new int[m][n];
+        Arrays.fill(dp, 1);
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+            }
+        }
+        return dp[m - 1][n - 1];
+    }
+}
+```
+
+### Array Range
+
+[303. Range Sum Query - Immutable](https://leetcode.com/problems/range-sum-query-immutable/)
+
+```java
+Given nums = [-2, 0, 3, -5, 2, -1]
+
+sumRange(0, 2) -> 1
+sumRange(2, 5) -> -1
+sumRange(0, 5) -> -3
+```
+
+```java
+class NumArray {
+
+    private int[] dp;
+    public NumArray(int[] nums) {
+        dp = new int[nums.length];
+        if (nums.length == 0) return;
+        dp[0] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            dp[i] = nums[i] + dp[i - 1];
+        }
+    }
+    public int sumRange(int i, int j) {
+        if (i == 0) return dp[j];
+        return dp[j] - dp[i - 1];
+    }
+}
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray obj = new NumArray(nums);
+ * int param_1 = obj.sumRange(i,j);
+ */
+```
+
+[413. Arithmetic Slices](https://leetcode.com/problems/arithmetic-slices/description/)
+
+```java
+A = [1, 2, 3, 4]
+
+return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] itself.
+```
+
+```java
+class Solution {
+    public int numberOfArithmeticSlices(int[] A) {
+        if (A.length <= 2) return 0;
+        int[] dp = new int[A.length];
+        int sum = 0;
+        for (int i = 2; i < A.length; i++) {
+            if (A[i] - A[i - 1] == A[i - 1] - A[i - 2]) {
+                dp[i] = dp[i - 1] + 1;
+            }
+            sum += dp[i];
+        }
+        return sum;
+    }
+}
+```
