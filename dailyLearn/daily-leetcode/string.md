@@ -54,5 +54,78 @@ class Solution {
 }
 ```
 
+2. [409. Longest Palindrome](https://leetcode.com/problems/longest-palindrome/)
 
+```java
+Input:
+"abccccdd"
 
+Output:
+7
+
+Explanation:
+One longest palindrome that can be built is "dccaccd", whose length is 7.
+```
+
+```java
+class Solution {
+    public int longestPalindrome(String s) {
+        int count = 0;
+        int[] num = new int[123];
+        for (char ch : s.toCharArray()) {
+            num[ch]++;
+        }
+        for (int i : num) {
+            count += i / 2 * 2;
+        }
+        return count < s.length() ? count + 1 : count;
+    }
+}
+```
+
+3. [205. Isomorphic Strings](https://leetcode.com/problems/isomorphic-strings/)
+
+```java
+Input: s = "egg", t = "add"
+Output: true
+```
+
+```java
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int[] preIndexOfS = new int[256];
+        int[] preIndexOfT = new int[256];
+        for (int i = 0; i < s.length(); i++) {
+            char sc = s.charAt(i), tc = t.charAt(i);
+            if (preIndexOfS[sc] != preIndexOfT[tc]) {
+                return false;
+            }
+            preIndexOfS[sc] = i + 1;
+            preIndexOfT[tc] = i + 1;
+        }
+        return true;
+    }
+}
+```
+
+```java
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        return isIsomorphicHelper(s, t) && isIsomorphicHelper(t, s);
+    }
+
+    public boolean isIsomorphicHelper(String s, String t) {
+        Map<Character, Character> hashMap = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (hashMap.containsKey(s.charAt(i))) {
+                if (hashMap.get(s.charAt(i)) != t.charAt(i)) {
+                    return false;
+                }
+            } else {
+                hashMap.put(s.charAt(i), t.charAt(i));
+            }
+        }
+        return true;
+    }
+}
+```
