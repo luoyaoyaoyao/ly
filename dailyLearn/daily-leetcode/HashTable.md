@@ -82,3 +82,45 @@ public int singleNumber(int[] nums) {
     }
 ```
 
+3. [217. Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
+
+```java
+Input: [1,2,3,1]
+Output: true
+```
+
+```java
+public boolean containsDuplicate(int[] nums) {
+    Arrays.sort(nums);
+    for (int i = 0; i < nums.length - 1; ++i) {
+        if (nums[i] == nums[i + 1]) return true;
+    }
+    return false;
+}
+```
+
+4. [594. Longest Harmonious Subsequence](https://leetcode.com/problems/longest-harmonious-subsequence/)
+
+```java
+Input: [1,3,2,2,5,2,3,7]
+Output: 5
+Explanation: The longest harmonious subsequence is [3,2,2,2,3].
+```
+
+```java
+class Solution {
+    public int findLHS(int[] nums) {
+        int ans = 0;
+        Map<Integer, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            hashMap.put(nums[i], hashMap.getOrDefault(nums[i], 0) + 1);
+        }
+        for (int num : hashMap.keySet()) {
+            if (hashMap.containsKey(num + 1)) {
+                ans = Math.max(ans, hashMap.get(num) + hashMap.get(num + 1));
+            }
+        }
+        return ans;
+    }
+}
+```
