@@ -129,3 +129,97 @@ class Solution {
     }
 }
 ```
+
+4. [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/)
+
+```java
+Input: "abc"
+Output: 3
+Explanation: Three palindromic strings: "a", "b", "c".
+```
+
+```java
+class Solution {
+    int count = 0;
+    public int countSubstrings(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            countSubstringHelper(s, i, i);
+            countSubstringHelper(s, i, i + 1);;
+        }
+        return count;
+    }
+    public int countSubstringHelper(String s, int start, int end) {
+        while (start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)) {
+                count++;
+                start--;
+                end++;
+        }
+        return count;
+    }
+}
+```
+
+5. [9. Palindrome Number](https://leetcode.com/problems/palindrome-number/description/)
+
+```java
+Input: 121
+Output: true
+```
+
+```java
+class Solution {
+    public boolean isPalindrome(int x) {
+        if (x < 0) return false;
+        String num = String.valueOf(x);
+        int start = 0;
+        int end = num.length() - 1;
+        while (start <= end) {
+            if (num.charAt(start++) != num.charAt(end)--) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
+
+```java
+class Solution {
+    public boolean isPalindrome(int x) {
+        if (x < 0) return false;
+        int temp = x;
+        int result = 0;
+        int remainder = 0;
+        while (temp != 0 || remainder != 0) {
+            remainder = temp % 10;
+            result = (result + remiander) * 10;
+            temp = temp / 10;
+        }
+        return result == x;
+    }
+}
+```
+
+6. [696. Count Binary Substrings](https://leetcode.com/problems/count-binary-substrings/description/)
+
+```java
+class Solution {
+    public int countBinarySubstrings(String s) {
+        if (s.length() == 0) return 1;
+        int ans = 0;
+        int preCount = 0; int currCount = 1;
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                currCount++;
+            } else {
+                preCount = currCount;
+                currCount = 1;
+            }
+            if (preCount >= currCount) {
+                ans += 1;
+            }
+        }
+        return ans;
+    }
+}
+```
