@@ -329,3 +329,66 @@ private int pathSumStartWithRoot(TreeNode root, int sum) {
     return ret;
 }
 ```
+
+11. [111. Minimum Depth of Binary Tree](https://leetcode.com/problems/minimum-depth-of-binary-tree/)
+
+```java
+Example:
+
+Given binary tree [3,9,20,null,null,15,7],
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return its minimum depth = 2.
+```
+
+```java
+class Solution {
+     public int minDepth(TreeNode root) {
+        //int ans = 0;
+        if (root == null) return 0;
+        if (root.left == null && root.right == null) return 1;
+        int L = minDepth(root.left);
+        int R = minDepth(root.right);
+        if (root.left == null || root.right == null) return L + R + 1;
+        return Math.min(L, R) + 1;
+    }
+```
+
+```java
+public int minDepth(TreeNode root) {
+    if (root == null) return 0;
+    int left = minDepth(root.left);
+    int right = minDepth(root.right);
+    if (left == 0 || right == 0) return left + right + 1;
+    return Math.min(left, right) + 1;
+}
+```
+
+12. [404. Sum of Left Leaves](https://leetcode.com/problems/sum-of-left-leaves/)
+
+```java
+    3
+   / \
+  9  20
+    /  \
+   15   7
+
+There are two left leaves in the binary tree, with values 9 and 15 respectively. Return 24.
+```
+
+```java
+public int sumOfLeftLeaves(TreeNode root) {
+    if (root == null) return 0;
+    if (isLeaf(root.left)) return root.left.val + sumOfLeftLeaves(root.right);
+    return sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);
+}
+
+private boolean isLeaf(TreeNode node){
+    if (node == null) return false;
+    return node.left == null && node.right == null;
+}
+```
