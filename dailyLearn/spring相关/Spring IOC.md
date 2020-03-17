@@ -17,6 +17,8 @@ IoC从字面上来看，Inversion of Control, 也被称作Dependency Injection. 
 BeanFactory: 接口，为Bean提供配置机制
 ApplicationContext: IoC容器，并负责初始化。BeanFactory的派生接口。并提供以下优点：
 
+集成了：ListableBeanFactory<可以获取多个bean>; HierarchicalBeanFactory<多个beanFactory>; AutowireCapableBeanFactory<可自动装配bean>
+
 1. 更容易与AOP集成
 
 2. 资源访问
@@ -69,7 +71,9 @@ LY
 
 ## IoC主要实现策略
 
-### 依赖注入
+### 依赖注入 (Dependency Injection)
+
+优点：代码更为简洁，进一步解耦（能够更好的管理依赖），减少内存消耗（不需要重复创建对象）
 
 ### 模板设计模式
 
