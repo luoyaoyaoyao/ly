@@ -71,35 +71,12 @@ class Solution {
 }
 ```
 
-```java
-class Solution {
-    public List<Integer> inorderTraversal(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<>();
-        List<Integer> result = new ArrayList<>();
-        stack.push(root);
-        TreeNode curr = root;
-        while (curr != null && !stack.isEmpty()) {
-            while (curr.left != null) {
-                curr = curr.left;
-                stack.push(curr);
-            }
-            TreeNode node = stack.pop();
-            result.add(node.val);
-            if (node.right != null) {
-                curr = node.right;
-                stack.push(curr);
-            }
-        }
-        return result;
-        }
-}
-```
 
 ```java
 public class Solution {
     public List < Integer > inorderTraversal(TreeNode root) {
-        List < Integer > res = new ArrayList < > ();
-        Stack < TreeNode > stack = new Stack < > ();
+        List <Integer> res = new ArrayList<>();
+        Stack <TreeNode> stack = new Stack<>();
         TreeNode curr = root;
         while (curr != null || !stack.isEmpty()) {
             while (curr != null) {
@@ -144,7 +121,7 @@ Solution:
 Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
 
 ```java
-   1
+    1
    / \
   2   2
  / \ / \
@@ -171,6 +148,16 @@ public boolean checkIfSymmetricTree(TreeNode p, TreeNode q) {
 ```
 
 5. [Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/)
+
+一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过1
+
+```java
+    3
+   / \
+  9  20
+    /  \
+   15   7
+```
 
 ```java
 class Solution {
@@ -200,6 +187,8 @@ class Solution {
 
 7. [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
 
+This path may or may not pass through the root.
+
 ```java
 Given a binary tree
           1
@@ -211,15 +200,6 @@ Return 3, which is the length of the path [4,2,1,3] or [5,2,1,3].
 ```
 
 ```java
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
 class Solution {
     int count = 1;
     public int diameterOfBinaryTree(TreeNode root) {

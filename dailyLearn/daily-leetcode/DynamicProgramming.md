@@ -463,6 +463,8 @@ class Solution {
 
 ### 字符串编辑
 
+[Delete Operation for Two Strings](https://leetcode.com/problems/delete-operation-for-two-strings/description/)
+
 ```java
 Input: "sea", "eat"
 Output: 2
