@@ -92,5 +92,36 @@ $ curl -X POST --data '{ "user_id": "foo",
 
 * 账号服务器放一个MQ，使用队列异步
 
+* Regulatory Service: 从MQ拉取数据，做监管，判断交易是否合规
+
+* Report Service：生成报表
+
+* Clearing Service: 清算
+
+* Transaction Service: 从MQ拉取数据进行交易
+
+#### 监管实现
+
+```java
+public enum TicketFeedSystem {
+  HK, LN, NY, TK
+}
+```
+
+```java
+Regulatory_map
+HK: return map_data(HK)
+LN: return map_data(LN)
+...
+```
+
+## Step4: Scale the design
+
+![TB_design](./img/tb_design.jpg)
+
+测试：1）基准测试/负载测试  2）瓶颈的概要文件  3）在评估替代方案和折中方案时解决瓶颈  4）重复
+
+细节问题： 如，设置几个负载均衡器，主从副本
+
 
 
