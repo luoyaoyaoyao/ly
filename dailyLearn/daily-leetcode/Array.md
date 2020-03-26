@@ -163,3 +163,32 @@ Given target = 20, return false.
 ```java
 
 ```
+
+[56. Merge Intervals](https://leetcode.com/problems/merge-intervals/)
+
+```java
+Input: [[1,3],[2,6],[8,10],[15,18]]
+Output: [[1,6],[8,10],[15,18]]
+Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
+```
+
+```java
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        if (intervals.length <= 1) return intervals;
+        List<int[]> res = new ArrayList<>();
+        Arrays.sort(intervals, (a, b) -> (a[0] - b[0]));
+        int[] newinterval = intervals[0];
+        res.add(intervals[0]);
+        for (int[] interval : intervals) {
+            if (interval[0] <= newinterval[1]) {
+                newinterval[1] = Math.max(interval[1], newinterval[1]);
+            } else {
+                newinterval = interval;
+                res.add(newinterval);
+            }
+        }
+        return res.toArray(new int[res.size()][]);
+    }
+}
+```
