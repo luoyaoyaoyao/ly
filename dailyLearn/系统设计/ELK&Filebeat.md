@@ -1,4 +1,6 @@
-# Filebeat
+# Filebeat & ELK
+
+## Filebeat
 
 总体设计
 
@@ -20,5 +22,25 @@ Product: input -> (event) -> queue -> consumer
 
 Consumer: 缓存 -> eventloop -> ClientWorker
 
-ACK机制
+ACK机制保证消息必达
+
+## ELK
+
+1. 关键概念： 
+
+1) NRT (Near Real Time)
+2) Cluster
+3) Node
+4) Index
+5) Type
+6) Document
+7) Shards & Replicas
+
+2. 分布式架构
+
+
+
+3. 部署
+
+
 
