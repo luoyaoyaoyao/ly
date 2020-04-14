@@ -68,6 +68,13 @@ public class Application {
 Initialization success  
 LY
 
+## BeanFactory
+
+了解一下IoC容器的启动过程
+
+```java
+
+```
 
 ## IoC主要实现策略
 
