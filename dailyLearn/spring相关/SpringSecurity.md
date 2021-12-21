@@ -90,3 +90,6 @@ public @interface EnableWebSecurity {
     }
 ```
 
+### 自动登录与自动注销
+
+#### 自动登录有两种方式
